@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Informatika XI | Context Before Code</title>
+  <meta name="description" content="Ruang belajar interaktif Informatika Kelas XI untuk memahami konsep, mencoba lab, dan menghubungkan ide.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="home.css">
+</head>
+<body class="home-page">
+  <header class="home-header">
+    <nav class="home-nav" aria-label="Navigasi utama">
+      <a class="home-brand" href="index.html"><span class="home-brand-mark">XI</span><span>Informatika <b>XI</b><small>LEARNING CONSOLE</small></span></a>
+      <button class="home-menu" type="button" data-menu-button aria-label="Buka menu">Menu</button>
+      <div class="home-links" data-nav-links>
+        <a href="#modules">Modules</a><a href="#signals">Signals</a><a href="modules.html">Reader</a><a href="lab.html">Virtual lab</a>
+      </div>
+      <a class="home-nav-cta" href="lab.html">Open lab <span aria-hidden="true">-&gt;</span></a>
+    </nav>
+  </header>
+  <main>
+    <section class="home-hero home-wrap">
+      <div class="hero-copy">
+        <p class="home-kicker"><span></span> Kurikulum Merdeka / build 08.42</p>
+        <h1>Pahami sistemnya sebelum <em>menulis kodenya.</em></h1>
+        <p class="hero-lede">Ruang belajar Informatika Kelas XI yang mengubah konsep menjadi peta kerja: materi terstruktur, simulasi, dan lab yang bisa langsung dicoba.</p>
+        <div class="hero-actions"><a class="home-button home-button-light" href="#modules">Explore modules <span>-&gt;</span></a><a class="home-button home-button-quiet" href="modules.html">Read the guide</a></div>
+        <div class="hero-stats"><div><strong>06</strong><span>learning paths</span></div><div><strong>04</strong><span>browser labs</span></div><div><strong>01</strong><span>shared workspace</span></div></div>
+      </div>
+      <div class="hero-console" aria-label="Visualisasi jaringan konsep Informatika">
+        <div class="console-grid"></div><div class="wire wire-a"></div><div class="wire wire-b"></div><div class="wire wire-c"></div>
+        <div class="console-core"><span>INPUT</span><strong>IDEA</strong><small>context / 01</small></div>
+        <div class="console-node node-a">DATA<small>signal</small></div><div class="console-node node-b">LOGIC<small>process</small></div><div class="console-node node-c">OUTPUT<small>result</small></div>
+        <div class="console-footer"><span>CONCEPT MAP</span><b>ONLINE</b></div>
+      </div>
+    </section>
+    <section class="home-section home-wrap" id="modules">
+      <div class="section-top"><div><p class="home-kicker">01 / learning paths</p><h2>Build a stronger mental model.</h2></div><p class="section-note">Pilih satu jalur, buka materinya, lalu lanjutkan ke virtual lab untuk menguji pemahaman.</p></div>
+      <div class="module-grid home-module-grid" data-module-grid></div>
+    </section>
+    <section class="signal-band home-wrap" id="signals"><div><p class="home-kicker">02 / system signals</p><h2>Belajar dengan <em>niat yang terukur.</em></h2><p>Setiap modul punya konsep inti, contoh nyata, dan satu ruang eksperimen. Progress bukan sekadar angka; ia menunjukkan hubungan yang sudah kamu pahami.</p></div><div class="signal-list"><div><b>01</b><span>Observe the system</span><strong>06 paths</strong></div><div><b>02</b><span>Test the assumption</span><strong>04 labs</strong></div><div><b>03</b><span>Explain the result</span><strong>infinite questions</strong></div></div></section>
+    <section class="home-cta home-wrap"><div><p class="home-kicker">03 / next action</p><h2>Konsep yang baik layak diuji.</h2><p>Masuk ke virtual lab dan ubah teori menjadi keputusan yang bisa diamati.</p></div><a class="home-button home-button-light" href="lab.html">Initialize virtual lab <span>-&gt;</span></a></section>
+  </main>
+  <footer class="home-footer home-wrap"><span>INFORMATIKA XI / LEARNING CONSOLE</span><span><a href="modules.html">Modules</a><a href="lab.html">Virtual lab</a></span></footer>
+  <script src="app.js"></script>
+</body>
+</html>
