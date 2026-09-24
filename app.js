@@ -16,6 +16,25 @@ function setupMenu() {
   if (button && nav) button.addEventListener("click", () => nav.classList.toggle("is-open"));
 }
 
+function setupParallax() {
+  const layers = document.querySelectorAll(".parallax-layer");
+  if (!layers.length || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  layers.forEach((layer) => {
+    layer.addEventListener("pointermove", (event) => {
+      const bounds = layer.getBoundingClientRect();
+      const x = ((event.clientX - bounds.left) / bounds.width - 0.5) * 12;
+      const y = ((event.clientY - bounds.top) / bounds.height - 0.5) * 12;
+      layer.style.setProperty("--parallax-x", `${x.toFixed(2)}px`);
+      layer.style.setProperty("--parallax-y", `${y.toFixed(2)}px`);
+    });
+    layer.addEventListener("pointerleave", () => {
+      layer.style.setProperty("--parallax-x", "0px");
+      layer.style.setProperty("--parallax-y", "0px");
+    });
+  });
+}
+
 function moduleLinks(currentId = "") {
   return modules.map((item, index) => `<a href="modules.html?module=${item.id}" ${item.id === currentId ? 'aria-current="page"' : ""}><span class="number">${String(index + 1).padStart(2, "0")}</span> ${item.title}</a>`).join("");
 }
@@ -60,7 +79,7 @@ function setupLabs() {
   if (!tabs || !panel) return;
   const current = new URLSearchParams(location.search).get("lab") || modules[0].id;
   tabs.innerHTML = modules.map((item) => `<a href="lab.html?lab=${item.id}" ${item.id === current ? 'aria-current="page"' : ""}>${item.title}</a>`).join("");
-  const lab = current === "sistem-komputer" ? `<h2>Simulator Spesifikasi PC</h2><p>Pilih kebutuhan dan anggaran untuk mendapatkan rekomendasi komponen.</p><div class="form-grid"><div class="field"><label for="job">Tujuan penggunaan</label><select id="job"><option value="office">Administrasi kantor</option><option value="gaming">Gaming dan rendering</option><option value="ml">Machine learning</option></select></div><div class="field"><label for="budget">Anggaran</label><select id="budget"><option value="low">Ekonomis</option><option value="mid">Menengah</option><option value="high">High-end</option></select></div></div><button class="button button-primary" data-pc-button>Rekomendasikan komponen</button><div class="result" data-pc-result hidden></div>` : current === "jaringan-komputer" ? `<h2>Terminal Network Simulator</h2><p>Gunakan perintah help, ipconfig, ping, tracert, atau clear.</p><div class="terminal"><div class="terminal-output" data-terminal-output>NetSim siap menerima perintah.</div><div class="terminal-row"><span>C:\\Siswa&gt;</span><input class="terminal-input" data-terminal-input aria-label="Perintah terminal"></div></div>` : current === "keamanan-digital" ? `<div class="lab-card light"><h2>Checklist Keamanan Digital</h2><div class="checklist">${["Gunakan password berbeda untuk setiap akun", "Aktifkan 2FA", "Perbarui sistem operasi dan aplikasi", "Cadangkan data secara rutin"].map((label) => `<label><input type="checkbox" data-security-check> <span>${label}</span></label>`).join("")}</div><div class="result" data-security-score>Skor: 0%</div></div>` : current === "literasi-hukum" ? `<h2>Advanced Search Playground</h2><p>Susun kueri dengan operator pencarian yang tepat.</p><div class="form-grid"><div class="field"><label for="query">Kata kunci</label><input id="query" placeholder="contoh: keamanan data"></div><div class="field"><label for="operator">Operator</label><select id="operator"><option>site:</option><option>filetype:</option><option>intitle:</option></select></div><div class="field"><label for="value">Nilai filter</label><input id="value" placeholder="gov.id atau pdf"></div></div><button class="button button-primary" data-query-button>Susun kueri</button><div class="result" data-query-result hidden></div>` : `<h2>Kuis ${moduleById(current).title}</h2><p>Jawab tiga pertanyaan singkat untuk memeriksa pemahamanmu.</p><div class="checklist"><label><input type="radio" name="q1" value="0"> Menulis kode adalah langkah pertama.</label><label><input type="radio" name="q1" value="1"> Memahami masalah adalah langkah pertama.</label><label><input type="radio" name="q2" value="1"> Iteration digunakan untuk pengulangan.</label><label><input type="radio" name="q2" value="0"> Selection digunakan untuk pengulangan.</label><label><input type="radio" name="q3" value="1"> Variable menyimpan nilai.</label><label><input type="radio" name="q3" value="0"> Variable menghapus sistem operasi.</label></div><button class="button button-primary" data-quiz-button>Periksa jawaban</button><div class="result" data-quiz-result hidden></div>`;
+  const lab = current === "sistem-komputer" ? `<h2>Simulator Spesifikasi PC</h2><p>Pilih kebutuhan dan anggaran untuk mendapatkan rekomendasi komponen.</p><div class="form-grid"><div class="field"><label for="job">Tujuan penggunaan</label><select id="job"><option value="office">Administrasi kantor</option><option value="gaming">Gaming dan rendering</option><option value="ml">Machine learning</option></select></div><div class="field"><label for="budget">Anggaran</label><select id="budget"><option value="low">Ekonomis</option><option value="mid">Menengah</option><option value="high">High-end</option></select></div></div><button class="button button-primary" data-pc-button>Rekomendasikan komponen</button><div class="result" data-pc-result hidden></div>` : current === "jaringan-komputer" ? `<h2>Terminal Network Simulator</h2><p>Gunakan perintah help, ipconfig, ping, tracert, atau clear.</p><div class="terminal"><div class="terminal-output" data-terminal-output>NetSim siap menerima perintah.</div><div class="terminal-row"><span>C:\\Siswa&gt;</span><input class="terminal-input" data-terminal-input aria-label="Perintah terminal"></div></div>` : current === "keamanan-digital" ? `<div class="lab-card light"><h2>Checklist Keamanan Digital</h2><div class="checklist">${["Gunakan password berbeda untuk setiap akun", "Aktifkan 2FA", "Perbarui sistem operasi dan aplikasi", "Cadangkan data secara rutin"].map((label) => `<label><input type="checkbox" data-security-check> <span>${label}</span></label>`).join("")}</div><div class="result" data-security-score>Skor: 0%</div></div>` : current === "literasi-hukum" ? `<h2>Advanced Search Playground</h2><p>Susun kueri dengan operator pencarian yang tepat.</p><div class="form-grid"><div class="field"><label for="query">Kata kunci</label><input id="query" placeholder="contoh: keamanan data"></div><div class="field"><label for="operator">Operator</label><select id="operator"><option>site:</option><option>filetype:</option><option>intitle:</option></select></div><div class="field"><label for="value">Nilai filter</label><input id="value" placeholder="gov.id atau pdf"></div></div><button class="button button-primary" data-query-button>Susun kueri</button><div class="result" data-query-result hidden></div>` : `<h2>Kuis ${moduleById(current).title}</h2><p>Jawab tiga pertanyaan singkat untuk memeriksa pemahamanmu.</p><div class="checklist"><fieldset class="quiz-question"><legend>1. Langkah paling penting sebelum menulis kode adalah...</legend><label><input type="radio" name="q1" value="0"> Menulis kode dulu agar cepat selesai</label><label><input type="radio" name="q1" value="1"> Memahami masalah dan tujuan dulu</label></fieldset><fieldset class="quiz-question"><legend>2. Struktur kontrol yang tepat untuk pengulangan adalah...</legend><label><input type="radio" name="q2" value="0"> Selection</label><label><input type="radio" name="q2" value="1"> Iteration</label></fieldset><fieldset class="quiz-question"><legend>3. Variable dalam program berfungsi untuk...</legend><label><input type="radio" name="q3" value="0"> Menghapus sistem operasi</label><label><input type="radio" name="q3" value="1"> Menyimpan nilai yang digunakan dalam program</label></fieldset></div><button class="button button-primary" data-quiz-button>Periksa jawaban</button><div class="result" data-quiz-result hidden></div>`;
   panel.innerHTML = lab;
   wireLab(current);
 }
@@ -79,6 +98,7 @@ function wireLab(current) {
 }
 
 setupMenu();
+setupParallax();
 renderHome();
 renderModule();
 setupLabs();
